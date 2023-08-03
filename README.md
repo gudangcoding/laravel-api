@@ -1,31 +1,33 @@
 ## Dokumentasi
-1. BUAT PROJECT VIA LARAGON
-2. Masuk ke root project kemudian buka via vscode lalu intall library swagger
-   composer require "darkaonline/l5-swagger"
-   php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
-3. Buat Model artikel
+1. BUAT PROJECT VIA LARAGON<br>
+2. Masuk ke root project kemudian buka via vscode lalu intall library swagger<br>
+   <code>composer require "darkaonline/l5-swagger"</code><br>
+   <code>php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"</code><br>
+3. Buat Model artikel<br>
    	<code>php artisan make:model Article -m</code>
-    Ubah File Model
-    class Article extends Model
+    Ubah File Model<br>
+    <code>class Article extends Model
     {
         use HasFactory;
     
         protected $fillable = ['title', 'content', 'status'];
     }
-4. Ubah file migration artikel
-    Schema::create('articles', function (Blueprint $table) {
+    </code><br>
+4. Ubah file migration artikel<br>
+    <code>Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content')->nullable();
             $table->enum('status', ['Published', 'Draft'])->default('Draft');
             $table->timestamps();
         });
-  lalu migrate 
-  php artisan migrate
-5. buat content dummy dengan factory
-   php artisan make:factory Article
-   ubah file factory
-   public function definition()
+   </code><br>
+  lalu migrate <br>
+  <code>php artisan migrate</code>
+5. buat content dummy dengan factory<br>
+   <code>php artisan make:factory Article</code><br>
+   ubah file factory<br>
+   <code>public function definition()
     {
         return [
             'title'   => $this->faker->realText($maxNbChars = 50, $indexSize = 2),
@@ -33,19 +35,21 @@
             'status'  => $this->faker->randomElement(['Published', 'Draft'])
         ];
     }
-    Tambahkan ke seeder
-    public function run()
+    </code><br>
+    Tambahkan ke seeder<br>
+    <code>public function run()
     {
         //seed users table
         \App\Models\User::factory(2)->create();
         //seed articles table
         \App\Models\Article::factory(50)->create();
     }
-    generate datanya dengan seeder
-    php artisan db:seed
+    </code><br>
+    generate datanya dengan seeder<br>
+    <code>php artisan db:seed</code><br>
 
-6. Ubah file Controller.php
-   <?php
+6. Ubah file Controller.php<br>
+   <code><?php
     //app/Http/Controllers/Controller.php
     
     namespace App\Http\Controllers;
@@ -77,8 +81,8 @@
     {
         use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     }
-
-7. generate swagger php artisan l5-swagger:generate
-akses dokumentasi 
-http://lara-api.app/api/documentation
+</code><br>
+7. <code>generate swagger php artisan l5-swagger:generate</code><br>
+akses dokumentasi<br> 
+http://lara-api.app/api/documentation<br>
 sumber : https://kodementor.com/laravel-api-documentation-with-swagger/
