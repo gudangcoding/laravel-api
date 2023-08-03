@@ -4,7 +4,7 @@
    composer require "darkaonline/l5-swagger"
    php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 3. Buat Model artikel
-   	php artisan make:model Article -m
+   	<code>php artisan make:model Article -m</code>
     Ubah File Model
     class Article extends Model
     {
